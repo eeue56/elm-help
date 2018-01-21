@@ -25,7 +25,7 @@ Options:
 ## Example
 
 ```
-noah@noah-ThinkPad-T470s:~/dev/elm-help/example$ elm-help --package eeue56/elm-flat-matrix --name power
+$ elm-help --package eeue56/elm-flat-matrix --name power
 ===============================================
 |   Module: Matrix.Extra
 ===============================================
@@ -33,3 +33,4 @@ noah@noah-ThinkPad-T470s:~/dev/elm-help/example$ elm-help --package eeue56/elm-f
 power : Matrix.Matrix number -> Matrix.Matrix number -> Maybe.Maybe (Matrix.Matrix number)
 element-wise power of elements
 ```
+
