@@ -139,7 +139,6 @@ function main(){
 
         let deps = JSON.parse(content.toString());
         let docsVersion = version || deps[packageName];
-        console.log('dcos', docsVersion)
         if (!docsVersion) return loadViaUrl();
         
         fs.readFile(`elm-stuff/packages/${packageName}/${docsVersion}/documentation.json`, (err, docsAsString) => {

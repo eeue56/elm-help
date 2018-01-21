@@ -20,3 +20,16 @@ Options:
   --version, -v  A version of a package, for example 1.0.0 or latest
   -h, --help     Show help                                             [boolean]
 ```
+
+
+## Example
+
+```
+noah@noah-ThinkPad-T470s:~/dev/elm-help/example$ elm-help --package eeue56/elm-flat-matrix --name power
+===============================================
+|   Module: Matrix.Extra
+===============================================
+
+power : Matrix.Matrix number -> Matrix.Matrix number -> Maybe.Maybe (Matrix.Matrix number)
+element-wise power of elements
+```

@@ -2,7 +2,9 @@
     "compilerOptions": {
         "noImplicitAny": true,
         "removeComments": true,
-        "preserveConstEnums": true
+        "preserveConstEnums": true,
+        "target": "es5",
+        "lib": ["es5", "es2015.collection", "es2015.promise"]
     },
     "include": [
         "*"
