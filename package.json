@@ -1,6 +1,6 @@
 {
   "name": "elm-help",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A tool to show information about a module or package in Elm",
   "main": "index.js",
   "bin": {
