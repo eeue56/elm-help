@@ -38,21 +38,27 @@ function renderStyledExposedValueDocs(value: ExposedValue): string {
     let isInCode = false;
     let codeBuffer = '';
 
-    value.comment.split('\n').forEach((line) => {
-        if (isInCode) {
-            if (line.indexOf('    ') === 0) {
-                codeBuffer += line + '\n';
+    if (value.comment.indexOf('\n') === -1){
+        buildLines.push(value.comment);
+    } else {
+        value.comment.split('\n').forEach((line) => {
+            if (isInCode) {
+                if (line.indexOf('    ') === 0) {
+                    codeBuffer += line + '\n';
+                } else {
+                    buildLines.push(highlight(codeBuffer, {language: 'elm'}));
+                    isInCode = false;
+                }
             } else {
-                buildLines.push(highlight(codeBuffer, {language: 'elm'}));
-                isInCode = false;
+                if (line.indexOf('    ') === 0){
+                    isInCode = true;
+                    codeBuffer += line + '\n';
+                } else {
+                    buildLines.push(line.trim());
+                }
             }
-        } else {
-            if (line.indexOf('    ') === 0){
-                isInCode = true;
-                codeBuffer += line + '\n';
-            }
-        }
-    });
+        });
+    }
 
     if (isInCode) {
         buildLines.push(highlight(codeBuffer, {language: 'elm'}));
@@ -60,7 +66,6 @@ function renderStyledExposedValueDocs(value: ExposedValue): string {
 
     return `
 ${definitionLine}
-
 ${buildLines.join('\n')}
     `.trim();
 }
