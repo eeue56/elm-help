@@ -1,6 +1,6 @@
 {
   "name": "elm-help",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1",
   "description": "A tool to show information about a module or package in Elm",
   "main": "index.js",
   "bin": {
@@ -31,6 +31,7 @@
     "@types/request-promise": "^4.1.39",
     "@types/yargs": "^8.0.2",
     "bluebird": "^3.5.1",
+    "cli-highlight": "^1.2.3",
     "es6-promise": "^4.2.2",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",

@@ -18,6 +18,7 @@ Options:
   --module, -m   A module inside the package, for example Maybe
   --name, -n     An exposed name, for example withDefault
   --version, -v  A version of a package, for example 1.0.0 or latest
+  --style        Enable syntax highlighting            [boolean] [default: true]
   -h, --help     Show help                                             [boolean]
 ```
 
