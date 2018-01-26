@@ -3,8 +3,11 @@
 import { spawn }  from "child_process";
 import * as yargs from "yargs";
 import * as fs from "fs";
+import * as path from "path";
 import * as request from "request-promise";
+import * as elmDocsParser from "elm-documentation-parser";
 const highlight = require('cli-highlight').highlight;
+import * as Promise from 'bluebird';
 
 
 interface ExposedValue {
@@ -141,6 +144,19 @@ function renderDocs(docs: Module[], packageName: string, moduleName: string, val
 }
 
 
+function localPackageInfo() {
+    let packagePath = path.join(process.cwd(), "/elm-package.json");
+    return new Promise((resolve, reject) => {
+        fs.access(packagePath, (err) =>{
+            if (err) return reject('Unable to find elm-package.json in the current directory!');    
+
+            elmDocsParser.readDocumentation(packagePath).then((modules) => {
+                resolve(modules);
+            });
+        })
+    });
+}
+
 function main(){
     const foundArgs = yargs
         .alias("package", "p")
@@ -154,7 +170,7 @@ function main(){
         .boolean("style")
         .describe("style", "Enable syntax highlighting")
         .default("style", true)
-        .usage("Provide a package name and I'll tell about that package")
+        .usage("Provide a package name and I'll tell about that package. By default, uses the package defined by elm-package.json in the current directory")
         .help()
         .alias("h", "help")
         .argv;
@@ -166,7 +182,9 @@ function main(){
     const withStyles = foundArgs.style;
 
     if (!packageName) {
-        console.log("Please specify a package name to look at using --package");
+        localPackageInfo().then((docs: Module[]) =>{
+            renderDocs(docs, packageName, moduleName, valueName, 'latest', withStyles);
+        });
         return;
     } 
 
@@ -196,6 +214,9 @@ function main(){
             renderDocs(docs, packageName, moduleName, valueName, version, withStyles);
         });
     });
-
 };
+
+
+
+
 main();
